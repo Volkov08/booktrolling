@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtTagSizeTracker;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.Registries;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +23,7 @@ public class PacketByteBufMixin {
         if (!PBB_instance.readBoolean()) {
             cir.setReturnValue(ItemStack.EMPTY);
         } else {
-            ItemStack itemStack = new ItemStack(PBB_instance.readRegistryValue(Registries.ITEM), PBB_instance.readByte());
+            ItemStack itemStack = new ItemStack(PBB_instance.readRegistryValue(Registry.ITEM), PBB_instance.readByte());
             ByteBufInputStream BBIS;
             int readerIndex = PBB_instance.readerIndex();
             byte b = PBB_instance.readByte();

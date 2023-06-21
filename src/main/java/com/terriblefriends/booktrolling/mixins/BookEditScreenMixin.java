@@ -1,6 +1,8 @@
 package com.terriblefriends.booktrolling.mixins;
 
 import com.terriblefriends.booktrolling.ToggleButton;
+import net.fabricmc.loader.impl.util.log.Log;
+import net.fabricmc.loader.impl.util.log.LogCategory;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
@@ -111,50 +113,50 @@ public abstract class BookEditScreenMixin extends Screen {
     @Inject(at=@At("HEAD"),method="Lnet/minecraft/client/gui/screen/ingame/BookEditScreen;init()V")
     private void addNewButtons(CallbackInfo ci) {
         int y = 0;
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("1023"), (button) -> {
+        this.addDrawableChild(new ButtonWidget(0, y, 98, 20,Text.literal("1023"), (button) -> {
             this.overloading = true;
             this.use3ByteChars = true;
             this.overloadAmount = 1023;
             this.finalizeBook(false);
             this.client.setScreen(null);
-        }).dimensions(0, y, 98, 20).build());
+        }));
         y+=20;
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("singleplayer"), (button) -> {
+        this.addDrawableChild(new ButtonWidget(0, y, 98, 20, Text.literal("singleplayer"), (button) -> {
             this.overloading = true;
             this.use3ByteChars = true;
             this.overloadAmount = 21837;//21837 if signing, 21845 if not
             this.finalizeBook(false);
             this.client.setScreen(null);
-        }).dimensions(0, y, 98, 20).build());
+        }));
         y+=20;
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("multiplayer"), (button) -> {
+        this.addDrawableChild(new ButtonWidget(0, y, 98, 20,Text.literal("multiplayer"), (button) -> {
             this.overloading = true;
             this.use3ByteChars = true;
             this.overloadAmount = 8192;
             this.finalizeBook(false);
             this.client.setScreen(null);
-        }).dimensions(0, y, 98, 20).build());
+        }));
         y+=20;
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("paper"), (button) -> {
+        this.addDrawableChild(new ButtonWidget(0, y, 98, 20,Text.literal("paper"), (button) -> {
             this.overloading = true;
             this.use3ByteChars = true;
             this.overloadAmount = 320;
             this.finalizeBook(false);
             this.client.setScreen(null);
-        }).dimensions(0, y, 98, 20).build());
+        }));
         y+=20;
-        this.addDrawableChild(ButtonWidget.builder(Text.literal("clear"), (button) -> {
+        this.addDrawableChild(new ButtonWidget(0, y, 98, 20,Text.literal("clear"), (button) -> {
             this.overloading = true;
             this.clear = true;
             this.finalizeBook(false);
             this.client.setScreen(null);
-        }).dimensions(0, y, 98, 20).build());
+        }));
         y+=20;
 
         this.addDrawableChild(new ToggleButton(0, this.height-20, 98, 20, Text.literal("AutoSign"), () -> {
             sign = !sign;
         }, sign));
-        this.addDrawableChild(new ToggleButton(0, this.height-40, 98, 20, Text.literal("RandomizeChars"), () -> {
+        this.addDrawableChild(new ToggleButton(0, this.height-40, 98, 20, Text.literal("Randomize"), () -> {
             randomizeChars = !randomizeChars;
         }, randomizeChars));
     }

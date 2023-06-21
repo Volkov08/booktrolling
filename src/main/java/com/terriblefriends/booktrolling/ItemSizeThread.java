@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtTagSizeTracker;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.Registries;
+import net.minecraft.util.registry.Registry;
 
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.Deflater;
@@ -35,7 +35,7 @@ public class ItemSizeThread extends Thread {
             this.results.diskSize = buf.readableBytes();
 
             buf.readBoolean();
-            ItemStack itemStack = new ItemStack(buf.readRegistryValue(Registries.ITEM), buf.readByte());
+            ItemStack itemStack = new ItemStack(buf.readRegistryValue(Registry.ITEM), buf.readByte());
 
             AtomicLong byteTracker = new AtomicLong(0);
 

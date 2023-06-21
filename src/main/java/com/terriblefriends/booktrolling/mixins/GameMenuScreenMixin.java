@@ -18,7 +18,7 @@ public class GameMenuScreenMixin extends Screen {
 
     @Inject(at=@At("TAIL"),method="Lnet/minecraft/client/gui/screen/GameMenuScreen;initWidgets()V")
     private void capclient$addGuiButtons(CallbackInfo ci) {
-        this.addDrawableChild(new ToggleButton(0, this.height-20, 98, 20, Text.literal("Item Size Debug"), () -> {
+        this.addDrawableChild(new ToggleButton(0, this.height-20, 128, 20, Text.literal("Item Size Debug"), () -> {
             Booktrolling.itemSizeDebug = !Booktrolling.itemSizeDebug;
         }, Booktrolling.itemSizeDebug));
     }

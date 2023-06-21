@@ -1,16 +1,22 @@
 package com.terriblefriends.booktrolling;
 
+import net.fabricmc.loader.impl.util.log.Log;
+import net.fabricmc.loader.impl.util.log.LogCategory;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 
 public class ToggleButton extends ButtonWidget {
     protected final PressAction onPress;
+    private boolean on;
+    private Text msg;
 
-    public ToggleButton(int x, int y, int width, int height, Text message, PressAction onPress, boolean active) {
-        super(x, y, width, height, message, null, ButtonWidget.DEFAULT_NARRATION_SUPPLIER);
+    public ToggleButton(int x, int y, int width, int height, Text message, PressAction onPress, boolean on) {
+        super(x, y, width, height, message, null);
         this.onPress = onPress;
-        this.active = active;
+        this.on = on;
+        this.msg = message;
+        this.setMessage(Text.literal(msg.getString() + ": " + (on ? "ON":"OFF")));
     }
 
     public void onPress() {
@@ -19,7 +25,8 @@ public class ToggleButton extends ButtonWidget {
     }
 
     public void toggleActive() {
-        this.active = !this.active;
+        this.on = !this.on;
+        this.setMessage(Text.literal(msg.getString() + ": " + (on ? "ON":"OFF")));
     }
 
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
@@ -37,6 +44,7 @@ public class ToggleButton extends ButtonWidget {
         return false;
     }
 
+    /*
     public boolean isMouseOver(double mouseX, double mouseY) {
         return this.visible && mouseX >= (double) this.getX() && mouseY >= (double)this.getY() && mouseX < (double)(this.getX() + this.width) && mouseY < (double)(this.getY() + this.height);
     }
@@ -45,6 +53,7 @@ public class ToggleButton extends ButtonWidget {
         return this.visible && mouseX >= (double)this.getX() && mouseY >= (double)this.getY() && mouseX < (double)(this.getX() + this.width) && mouseY < (double)(this.getY() + this.height);
     }
 
+    */
     public interface PressAction {
         void onPress();
     }
